@@ -1,13 +1,4 @@
-#include <stdio.h>
-#include "graphe_liste.h"
-#include "graphe_matrice.h"
-#include "utils.h"
-
-int main() {
-    
-}
-
-/*
+#include "utils.h"/*
  * Génération d'une liste d'adjacence aléatoire
  * @param n nombre de sommets
  * @param m nombre d'arrêtes avec m <= n*(n-1)
