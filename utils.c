@@ -45,11 +45,12 @@ LISTE generationAleat(unsigned int n,unsigned int m){
             printf("\n");
         }
 
-
+        srand(time(NULL));
         for(unsigned int i = 0; i<n ; i++){
             for(unsigned int j = 0; j<n; j++){
                 if(M[i][j] == 1){
-                    L = add_arete(&L, i, j);
+                    int c = (int) (rand()%11 -5 );
+                    L = add_arete(&L, i, j, c);
                 }
             }
         }

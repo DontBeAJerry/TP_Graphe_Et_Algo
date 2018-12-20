@@ -43,13 +43,14 @@ void liberation_LISTE(LISTE g)
 }
 
 /* ajout de l'arete (i,j) dans le graphe donne */
-LISTE add_arete(LISTE *g,unsigned int i,unsigned int j)
+LISTE add_arete(LISTE *g,unsigned int i,unsigned int j, int c)
 {
     if (i < g->n)
     {
         MAILLON *new = (MAILLON*)malloc(sizeof(MAILLON));
         assert (new != NULL);
         new->s = j;
+        new->c = c;
         new->suivant = g->L[i];
         g->L[i] = new;
     }
@@ -118,6 +119,6 @@ void afficher_liste(MAILLON* l , unsigned int i)
     else
     {
         afficher_liste(l->suivant , i);
-        printf("%d->", l->s);
+        printf("(%d , %d)->", l->s , l->c);
     }
 }

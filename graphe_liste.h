@@ -12,6 +12,7 @@
 /* representation d'un graphe non oriente par listes d'adjacence */
 	typedef struct maillon {
 		unsigned int s;				        /* indice du sommet */
+		unsigned int c;				        /* cout du sommet */
 		struct maillon *suivant;	/* pointeur sur le suivant */
 	} MAILLON;
 
@@ -29,7 +30,7 @@
 	void liberation_LISTE(LISTE g);
 
   /* ajout de l'arete (i,j) dans le graphe donne */
-    LISTE add_arete(LISTE *g,unsigned int i,unsigned int j);
+    LISTE add_arete(LISTE *g,unsigned int i,unsigned int j, int c);
 
   /* suppression de l'arete (i,j) dans le graphe donne */
     void drop_arete(LISTE *g,unsigned int i,unsigned int j);
