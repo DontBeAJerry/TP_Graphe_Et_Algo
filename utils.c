@@ -29,7 +29,8 @@ LISTE generationAleat(unsigned int n,unsigned int m){
             if(M[i][j] == 0){
                 unsigned int aleatoire = (unsigned int) (rand() / (double) RAND_MAX * (101 - 1) + 1);
                 if(aleatoire > 50){
-                    M[i][j] = 1;
+                    M[i][j] = (int) (rand()%11 -5 );
+                    L = add_arete(&L, i, j, M[i][j]);
                     comptArrete++;
                 }
             }
@@ -45,15 +46,7 @@ LISTE generationAleat(unsigned int n,unsigned int m){
             printf("\n");
         }
 
-        srand(time(NULL));
-        for(unsigned int i = 0; i<n ; i++){
-            for(unsigned int j = 0; j<n; j++){
-                if(M[i][j] == 1){
-                    int c = (int) (rand()%11 -5 );
-                    L = add_arete(&L, i, j, c);
-                }
-            }
-        }
+
 
     return L;
 }
@@ -61,4 +54,21 @@ LISTE generationAleat(unsigned int n,unsigned int m){
 //Comparaison en tre deux maillons
 unsigned int egale(MAILLON m1 , MAILLON m2){
     return m1.s==m2.s;
+}
+
+/*
+void bellmanFord(){
+    for(int i=0; i<l.n; i++){
+        break;
+    }
+
+}*/
+
+int bellmanFord(LISTE l, int i, int s){
+
+
+
+
+
+    return 0;
 }
