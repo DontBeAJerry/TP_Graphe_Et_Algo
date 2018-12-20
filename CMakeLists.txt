@@ -3,4 +3,4 @@ project(TP_Graphe_Et_Algo C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(TP_Graphe_Et_Algo main.c utils.h)
+add_executable(TP_Graphe_Et_Algo main.c graphe_liste.c graphe_liste.h utils.c utils.h)

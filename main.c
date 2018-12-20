@@ -21,8 +21,6 @@ int main() {
     LISTE l;
 
     l = generationAleat(n, m);
-    /*
     afficher_LISTE(l);
-    */
      return 0;
 }

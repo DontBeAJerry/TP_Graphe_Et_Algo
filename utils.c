@@ -37,6 +37,16 @@ LISTE generationAleat(unsigned int n,unsigned int m){
                 }
             }
         }
+
+        //Affichage de la matrice d'adjacence
+        for(unsigned int i = 0; i<n ; i++) {
+            for (unsigned int j = 0; j < n; j++) {
+                printf("%d ", M[i][j]);
+            }
+            printf("\n");
+        }
+
+
         for(unsigned int i = 0; i<n ; i++){
             for(unsigned int j = 0; j<n; j++){
                 if(M[i][j] == 1){
