@@ -1,9 +1,16 @@
-#include "utils.h"/*
- * Génération d'une liste d'adjacence aléatoire
- * @param n nombre de sommets
- * @param m nombre d'arrêtes avec m <= n*(n-1)
- */
-void generationAleat(unsigned int n,unsigned int m){
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "utils.h"
+
+/*
+* Génération d'une liste d'adjacence aléatoire puis converti en liste
+* @param n nombre de sommets
+* @param m nombre d'arrêtes avec m <= n*(n-1)
+*/
+LISTE generationAleat(unsigned int n,unsigned int m){
+    LISTE L = reservation_memoire_LISTE(n);
+
     if(m<=(n*(n-1))){
         unsigned int comptArrete = 0;
         int M[n][n];
@@ -30,5 +37,13 @@ void generationAleat(unsigned int n,unsigned int m){
                 }
             }
         }
+        for(unsigned int i = 0; i<n ; i++){
+            for(unsigned int j = 0; j<n; j++){
+                if(M[i][j] == 1){
+                    L = add_arete(&L, i, j);
+                }
+            }
+        }
     }
+    return L;
 }

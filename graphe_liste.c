@@ -3,9 +3,9 @@
 #include "graphe_liste.h"
 
 /* reservation en memoire du tableau de n listes chainees, initialisees e des listes vides */
-LISTE reservation_memoire_LISTE(int n)
+LISTE reservation_memoire_LISTE(unsigned int n)
 {
-    int i;
+    unsigned int i;
     LISTE g;
 
     /* allocation memoire d'un tableau de n listes chainees */
@@ -34,7 +34,7 @@ void liberation_liste(MAILLON **l)
    liberation du tableau */
 void liberation_LISTE(LISTE g)
 {
-    int i;
+    unsigned int i;
 
     assert(g.L != NULL);
     for(i=0; i<g.n; i++)
@@ -43,7 +43,7 @@ void liberation_LISTE(LISTE g)
 }
 
 /* ajout de l'arete (i,j) dans le graphe donne */
-LISTE add_arete(LISTE *g, int i, int j)
+LISTE add_arete(LISTE *g,unsigned int i,unsigned int j)
 {
     i--;
     if (i < g->n)
@@ -62,13 +62,13 @@ LISTE add_arete(LISTE *g, int i, int j)
 }
 
 /* suppression de l'arete (i,j) dans le graphe donne */
-void drop_arete(LISTE *g, int i, int j)
+void drop_arete(LISTE *g,unsigned int i,unsigned int j)
 {
     i--;
     if (i < g->n)
     {
-        int cpt = 0;
-        int debutListe = 1;
+        unsigned int cpt = 0;
+        unsigned int debutListe = 1;
         MAILLON *precedentTemp = (MAILLON*)malloc(sizeof(MAILLON));
         MAILLON *tmp = (MAILLON*) malloc(sizeof(MAILLON));
         tmp = g->L[i];
@@ -124,13 +124,6 @@ void afficher_liste(MAILLON* l , unsigned int i)
     }
 }
 
-/* construit le graphe par matrice d'adjacence d'un graphe donne par listes d'adjacences */
-MATRICE liste_to_matrice(LISTE g)
-{
-    MATRICE m;
-
-    return m;
-}
 
 /* construit le graphe represente par liste des predecesseurs e partir de celui par listes des successeurs (listes d'adjacence) */
 LISTE succ_to_pred(LISTE g)
@@ -144,43 +137,4 @@ LISTE succ_to_pred(LISTE g)
 void calculs_degres(LISTE g, int *d)
 {
 
-}
-
-/* fonction de tri utilise dans l'appel de qsort (voir coloration_Welsh_Powell */
-static int tri_decroissant(const void *a, const void *b)
-{
-    if(((sommet_tri *)a)->val < ((sommet_tri *)b)->val)
-        return 1;
-    if(((sommet_tri *)a)->val > ((sommet_tri *)b)->val)
-        return -1;
-    if(((sommet_tri *)a)->s > ((sommet_tri *)b)->s)
-        return 1;
-    if(((sommet_tri *)a)->s < ((sommet_tri *)b)->s)
-        return -1;
-    return 0;
-}
-
-/* implementation de l'algorithme de coloration de Welsh Powell e partir du graphe g en entree, et des degres
-   des sommets (d) prealablement calcules.
-   L'algorithme complete un tableau couleurs contenant les "couleurs" de chaque sommet (entier de 0 e nchro-1),
-   nchro etant le nombre chromatique du graphe */
-void coloration_Welsh_Powell(LISTE g, int *d, int *couleurs, int *nchro)
-{
-    int i;
-    sommet_tri *s;
-
-    /* etape 1 : tri des sommets par degre decroissant */
-    s = (sommet_tri *)calloc(g.n, sizeof(sommet_tri));
-    assert(s != NULL);
-    for(i=0; i<g.n; i++) {
-        s[i].s = i;             /* sauvegarde de l'indice original du sommet */
-        s[i].val = d[i];        /* valeur utile pour le tri = degre */
-    }
-    /* tri du tableau ainsi genere => la case 0 contiendra l'indice du sommet ayant le plus grand degre */
-    qsort((void *)s, (size_t)g.n, (size_t)sizeof(sommet_tri), tri_decroissant);
-
-    /* ................... */
-
-    /* liberation memoire du tableau temporaire */
-    free(s);
 }
