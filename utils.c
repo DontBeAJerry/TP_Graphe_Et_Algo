@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "time.h"
 #include "utils.h"
 
 /*
@@ -23,13 +23,13 @@ LISTE generationAleat(unsigned int n,unsigned int m){
         }
 
         //Création d'une matrice d'adjacence aléatoire
+        srand(time(NULL));
         while (comptArrete < m){
             for(unsigned int i = 0; i<n ; i++){
                 for(unsigned int j = 0; j<n; j++){
                     if(M[i][j] == 0){
-                        //TODO Random
-                        int rand = 0;
-                        if(rand > 50){
+                        unsigned int aleatoire = (unsigned int) (rand() / (double) RAND_MAX * (101 - 1) + 1);
+                            if(aleatoire > 50){
                             M[i][j] = 1;
                             comptArrete++;
                         }
