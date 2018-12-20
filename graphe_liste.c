@@ -122,3 +122,4 @@ void afficher_liste(MAILLON* l , unsigned int i)
         printf("(%d , %d)->", l->s , l->c);
     }
 }
+

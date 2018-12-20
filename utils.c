@@ -11,9 +11,9 @@
 LISTE generationAleat(unsigned int n,unsigned int m){
     LISTE L = reservation_memoire_LISTE(n);
     unsigned int comptArrete = 0;
+    int M[n][n];
 
     if(m<=(n*(n-1))){
-        int M[n][n];
         //Initialisation de la matrice
         for(unsigned int i = 0; i<n ; i++){
             for(unsigned int j = 0; j<n; j++){
@@ -24,18 +24,18 @@ LISTE generationAleat(unsigned int n,unsigned int m){
         //Création d'une matrice d'adjacence aléatoire
         srand(time(NULL));
         while (comptArrete < m){
-            for(unsigned int i = 0; i<n ; i++){
-                for(unsigned int j = 0; j<n; j++){
-                    if(M[i][j] == 0 && comptArrete < m){
-                        unsigned int aleatoire = (unsigned int) (rand() / (double) RAND_MAX * (101 - 1) + 1);
-                        if(aleatoire > 50){
-                            M[i][j] = 1;
-                            comptArrete++;
-                        }
-                    }
+            unsigned int i = (unsigned int) (rand() / (double) RAND_MAX * (n));
+            unsigned int j = (unsigned int) (rand() / (double) RAND_MAX * (n));
+            if(M[i][j] == 0){
+                unsigned int aleatoire = (unsigned int) (rand() / (double) RAND_MAX * (101 - 1) + 1);
+                if(aleatoire > 50){
+                    M[i][j] = 1;
+                    comptArrete++;
                 }
             }
         }
+    }
+
 
         //Affichage de la matrice d'adjacence
         for(unsigned int i = 0; i<n ; i++) {
@@ -54,6 +54,14 @@ LISTE generationAleat(unsigned int n,unsigned int m){
                 }
             }
         }
-    }
+
     return L;
 }
+
+/*
+void bellmanFord(){
+    for(int i=0; i<l.n; i++){
+        break;
+    }
+
+}*/
