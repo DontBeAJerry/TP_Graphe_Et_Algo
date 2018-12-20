@@ -39,16 +39,4 @@
 
     void afficher_liste(MAILLON* l , unsigned int i);
 
- /* construit le graphe represente par liste des predecesseurs e partir de celui par listes des successeurs (listes d'adjacence) */
-    LISTE succ_to_pred(LISTE g);
-
-/* calcule les degres des sommets (remplissage du tableau d) */
-	void calculs_degres(LISTE g, int *d);
-
-/* implementation de l'algorithme de coloration de Welsh Powell e partir du graphe g en entree, et des degres
-   des sommets (d) prealablement calcules.
-   L'algorithme complete un tableau couleurs contenant les "couleurs" de chaque sommet (entier de 0 e nchro-1),
-   nchro etant le nombre chromatique du graphe */
-   void coloration_Welsh_Powell(LISTE g, int *d, int *couleurs, int *nchro);
-
 #endif

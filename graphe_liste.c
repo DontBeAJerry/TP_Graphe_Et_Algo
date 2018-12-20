@@ -45,7 +45,6 @@ void liberation_LISTE(LISTE g)
 /* ajout de l'arete (i,j) dans le graphe donne */
 LISTE add_arete(LISTE *g,unsigned int i,unsigned int j)
 {
-
     if (i < g->n)
     {
         MAILLON *new = (MAILLON*)malloc(sizeof(MAILLON));
@@ -68,7 +67,6 @@ void drop_arete(LISTE *g,unsigned int i,unsigned int j)
     if (i < g->n)
     {
         unsigned int cpt = 0;
-        unsigned int debutListe = 1;
         MAILLON *precedentTemp = (MAILLON*)malloc(sizeof(MAILLON));
         MAILLON *tmp = (MAILLON*) malloc(sizeof(MAILLON));
         tmp = g->L[i];
@@ -122,19 +120,4 @@ void afficher_liste(MAILLON* l , unsigned int i)
         afficher_liste(l->suivant , i);
         printf("%d->", l->s);
     }
-}
-
-
-/* construit le graphe represente par liste des predecesseurs e partir de celui par listes des successeurs (listes d'adjacence) */
-LISTE succ_to_pred(LISTE g)
-{
-    LISTE gp;
-
-    return gp;
-}
-
-/* calcule les degres des sommets (remplissage du tableau d) */
-void calculs_degres(LISTE g, int *d)
-{
-
 }
