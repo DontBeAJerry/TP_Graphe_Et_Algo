@@ -58,10 +58,7 @@ LISTE generationAleat(unsigned int n,unsigned int m){
     return L;
 }
 
-/*
-void bellmanFord(){
-    for(int i=0; i<l.n; i++){
-        break;
-    }
-
-}*/
+//Comparaison en tre deux maillons
+unsigned int egale(MAILLON m1 , MAILLON m2){
+    return m1.s==m2.s;
+}

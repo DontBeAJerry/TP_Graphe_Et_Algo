@@ -8,5 +8,6 @@
     #include "graphe_liste.h"
     LISTE generationAleat(unsigned int n,unsigned int m);
 
+    unsigned int egale(MAILLON m1 , MAILLON m2);
 
 #endif //TP_GRAPHE_ET_ALGO_UTILS_H
