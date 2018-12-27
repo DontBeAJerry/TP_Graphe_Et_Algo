@@ -2,6 +2,8 @@
 #include "graphe_liste.h"
 #include "utils.h"
 
+LISTE generationFixe(int n, int m);
+
 int main() {
 
     unsigned int n = 0;
@@ -21,11 +23,39 @@ int main() {
 
     */
     LISTE l;
-    l = generationAleat(5, 5);
+    //l = generationAleat(5, 10);
+    l = generationFixe(5,10);
     afficher_LISTE(l);
 
     bellmanFord(l, 0);
 
-    printf("fin");
     return 0;
+}
+
+//Permet de tester rapidement une liste fixe
+LISTE generationFixe(int n, int m){
+    LISTE l = reservation_memoire_LISTE(n);
+    int M[5][5] = { {0,6,7,0,0},
+                    {0,0,8,5,-4},
+                    {0,0,0,-3,9},
+                    {0,-2,0,0,0},
+                    {2,0,0,7,0}};
+
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j<n; j++){
+            if(M[i][j] != 0){
+                l = add_arete(&l, i, j, M[i][j]);
+            }
+        }
+    }
+    l.n = n;
+    l.m = m;
+    //Affichage de la matrice d'adjacence
+    for(unsigned int i = 0; i<n ; i++) {
+        for (unsigned int j = 0; j < n; j++) {
+            printf("%d ", M[i][j]);
+        }
+        printf("\n");
+    }
+    return l;
 }

@@ -65,57 +65,68 @@ void bellmanFord(LISTE l, int s){
     int m = l.m;
     int d[n];
     int absorbant = 0;
-    MAILLON* tmp = l.L[s];
+    MAILLON* tmp;
 
-    if(tmp != NULL) {
 
-        /* Initialisation des distances à + l'infini
-         * Distance source à 0
-         */
-        for (int i = 0; i < l.n; i++) {
-            d[i] = INT_MAX;
-        }
-        d[s] = 0;
+    /* Initialisation des distances à + l'infini
+     * Distance source à 0
+     */
+    for (int i = 0; i < l.n; i++) {
+        d[i] = INT_MAX;
+    }
+    d[s] = 0;
 
-        for (int i = 1; i <= n - 1; i++) {
-            while (tmp->suivant != NULL) {
-                int source = tmp->s;
-                int dest = tmp->suivant->s;
+    /*
+     * Pour chaque sommet L[i] de la liste l, on compte le cout des arcs
+     */
+    for (int i = 0; i < n ; i++) {
+        tmp = l.L[i];
+        //Si le sommet à des successeurs
+        if(tmp != NULL){
+            //Tant que le sommet à des successeurs
+            while (tmp != NULL) {
+                int source = i;
+                int dest = tmp->s;
                 int poids = tmp->c;
 
+                //Ajout du cout pour le sommet indiqué
                 if (d[source] + poids < d[dest]) {
                     d[dest] = d[source] + poids;
                 }
                 tmp = tmp->suivant;
             }
-
+        }else{
+            printf("Le sommet actuel (0) n'a pas de successeur, veuillez relancer le programme");
         }
-
-        tmp = l.L[s];
-
-        while (tmp->suivant != NULL) {
-            int source = tmp->s;
-            int dest = tmp->suivant->s;
-            int poids = tmp->c;
-
-            if (d[source] + poids < d[dest]) {
-                printf("Le graphe contient des circuits absorbants");
-                absorbant = 1;
-            }
-
-            tmp = tmp->suivant;
-        }
-
-        if (absorbant == 0) {
-            printf("Le graphe ne contient pas de circuit absorbant");
-        }
-
-
-        solution(d, n);
-
-    }else{
-        printf("Le sommet actuel (0) n'a pas de successeur, veuillez relancer le programme");
     }
+
+    for (int i = 0; i < n ; i++) {
+        tmp = l.L[i];
+        if (tmp != NULL) {
+            while (tmp != NULL) {
+                int source = i;
+                int dest = tmp->s;
+                int poids = tmp->c;
+
+                if (d[source] + poids < d[dest]) {
+                    absorbant = 1;
+                }
+
+                tmp = tmp->suivant;
+            }
+        }
+    }
+
+    if (absorbant == 0) {
+        printf("Le graphe ne contient pas de circuit absorbant");
+    }else{
+        printf("Le graphe contient des circuits absorbants");
+    }
+
+
+    solution(d, n);
+
+
 
 }
 
