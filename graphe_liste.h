@@ -11,13 +11,14 @@
 
 /* representation d'un graphe non oriente par listes d'adjacence */
 	typedef struct maillon {
-		unsigned int s;				        /* indice du sommet */
-		unsigned int c;				        /* cout du sommet */
+		int s;				        /* indice du sommet */
+		int c;				        /* cout du sommet */
 		struct maillon *suivant;	/* pointeur sur le suivant */
 	} MAILLON;
 
 	typedef struct {
         unsigned int n;              /* nombre de sommets du graphe */
+        unsigned int m;              /* nombre d'arrêtes du graphe */
         MAILLON **L;        /* tableau de listes d'adjacence : L[i] <=> liste chainee des successeurs du sommet i */
 	} LISTE;
 

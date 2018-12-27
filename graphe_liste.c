@@ -119,7 +119,7 @@ void afficher_liste(MAILLON* l , unsigned int i)
     else
     {
         afficher_liste(l->suivant , i);
-        printf("(%d , %d)->", l->s , l->c);
+        printf("(%d , %d) // ", l->s , l->c);
     }
 }
 

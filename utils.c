@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "time.h"
 #include "utils.h"
 
@@ -36,7 +37,8 @@ LISTE generationAleat(unsigned int n,unsigned int m){
             }
         }
     }
-
+    L.n = n;
+    L.m = m;
 
         //Affichage de la matrice d'adjacence
         for(unsigned int i = 0; i<n ; i++) {
@@ -52,23 +54,80 @@ LISTE generationAleat(unsigned int n,unsigned int m){
 }
 
 //Comparaison en tre deux maillons
-unsigned int egale(MAILLON m1 , MAILLON m2){
+bool egale(MAILLON m1 , MAILLON m2){
     return m1.s==m2.s;
 }
 
-/*
-void bellmanFord(){
-    for(int i=0; i<l.n; i++){
-        break;
+
+
+void bellmanFord(LISTE l, int s){
+    int n = l.n;
+    int m = l.m;
+    int d[n];
+    int absorbant = 0;
+    MAILLON* tmp = l.L[s];
+
+    if(tmp != NULL) {
+
+        /* Initialisation des distances à + l'infini
+         * Distance source à 0
+         */
+        for (int i = 0; i < l.n; i++) {
+            d[i] = INT_MAX;
+        }
+        d[s] = 0;
+
+        for (int i = 1; i <= n - 1; i++) {
+            while (tmp->suivant != NULL) {
+                int source = tmp->s;
+                int dest = tmp->suivant->s;
+                int poids = tmp->c;
+
+                if (d[source] + poids < d[dest]) {
+                    d[dest] = d[source] + poids;
+                }
+                tmp = tmp->suivant;
+            }
+
+        }
+
+        tmp = l.L[s];
+
+        while (tmp->suivant != NULL) {
+            int source = tmp->s;
+            int dest = tmp->suivant->s;
+            int poids = tmp->c;
+
+            if (d[source] + poids < d[dest]) {
+                printf("Le graphe contient des circuits absorbants");
+                absorbant = 1;
+            }
+
+            tmp = tmp->suivant;
+        }
+
+        if (absorbant == 0) {
+            printf("Le graphe ne contient pas de circuit absorbant");
+        }
+
+
+        solution(d, n);
+
+    }else{
+        printf("Le sommet actuel (0) n'a pas de successeur, veuillez relancer le programme");
     }
 
-}*/
-
-int bellmanFord(LISTE l, int i, int s){
-
-
-
-
-
-    return 0;
 }
+
+void solution(int dist[], int n)
+{
+    // This function prints the final solution
+    printf("\nVertex\tDistance from Source Vertex\n");
+    int i;
+
+    for (i = 0; i < n; ++i){
+        printf("%d \t\t %d\n", i, dist[i]);
+    }
+}
+
+
