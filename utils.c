@@ -95,27 +95,24 @@ void bellmanFord(LISTE l, int s){
                 }
                 tmp = tmp->suivant;
             }
-        }else{
-            printf("Le sommet actuel (0) n'a pas de successeur, veuillez relancer le programme");
         }
     }
 
-    for (int i = 0; i < n ; i++) {
-        tmp = l.L[i];
-        if (tmp != NULL) {
-            while (tmp != NULL) {
-                int source = i;
-                int dest = tmp->s;
-                int poids = tmp->c;
+    tmp = l.L[s];
+    if (tmp != NULL) {
+        while (tmp != NULL) {
+            int source = s;
+            int dest = tmp->s;
+            int poids = tmp->c;
 
-                if (d[source] + poids < d[dest]) {
-                    absorbant = 1;
-                }
-
-                tmp = tmp->suivant;
+            if (d[source] + poids < d[dest]) {
+                absorbant = 1;
             }
+
+            tmp = tmp->suivant;
         }
     }
+
 
     if (absorbant == 0) {
         printf("Le graphe ne contient pas de circuit absorbant");
@@ -124,19 +121,18 @@ void bellmanFord(LISTE l, int s){
     }
 
 
-    solution(d, n);
+    solution(d, n, s);
 
 
 
 }
 
-void solution(int dist[], int n)
+void solution(int dist[], int n, int s)
 {
     // This function prints the final solution
-    printf("\nVertex\tDistance from Source Vertex\n");
-    int i;
+    printf("\nSommet \tDistance depuis le sommet %d\n",s);
 
-    for (i = 0; i < n; ++i){
+    for (int i = 0; i < n; ++i){
         printf("%d \t\t %d\n", i, dist[i]);
     }
 }
