@@ -30,7 +30,10 @@ LISTE generationAleat(unsigned int n,unsigned int m){
             if(M[i][j] == 0){
                 unsigned int aleatoire = (unsigned int) (rand() / (double) RAND_MAX * (101 - 1) + 1);
                 if(aleatoire > 50){
-                    M[i][j] = (int) (rand()%11 -5 );
+                    //cout différent de 0
+                    do {
+                        M[i][j] = (int) (rand() % 11 - 5);
+                    }while(M[i][j] == 0);
                     L = add_arete(&L, i, j, M[i][j]);
                     comptArrete++;
                 }
@@ -76,13 +79,11 @@ void bellmanFord(LISTE l, int s){
     }
     d[s] = 0;
 
-    /*
-     * Pour chaque sommet L[i] de la liste l, on compte le cout des arcs
-     */
-    for (int i = 0; i < n ; i++) {
-        tmp = l.L[i];
-        //Si le sommet à des successeurs
-        if(tmp != NULL){
+    //A faire n fois, n étant le nombre de sommet
+    for(int j = 1; j<= n-1; j++) {
+        //Parcours de tout les sommets et de leurs successeurs pour évaluer leur cout
+        for (int i = 0; i < n; i++) {
+            tmp = l.L[i];
             //Tant que le sommet à des successeurs
             while (tmp != NULL) {
                 int source = i;
@@ -95,23 +96,28 @@ void bellmanFord(LISTE l, int s){
                 }
                 tmp = tmp->suivant;
             }
+
         }
     }
 
-    tmp = l.L[s];
-    if (tmp != NULL) {
-        while (tmp != NULL) {
-            int source = s;
-            int dest = tmp->s;
-            int poids = tmp->c;
+    for(int j = 1; j<= n-1; j++) {
+        //Parcours de tout les sommets et de leurs successeurs pour évaluer leur cout
+        for (int i = 0; i < n; i++) {
+            tmp = l.L[i];
+            while (tmp != NULL) {
+                int source = s;
+                int dest = tmp->s;
+                int poids = tmp->c;
 
-            if (d[source] + poids < d[dest]) {
-                absorbant = 1;
+                if (d[source] + poids < d[dest]) {
+                    absorbant = 1;
+                }
+
+                tmp = tmp->suivant;
             }
-
-            tmp = tmp->suivant;
         }
     }
+
 
 
     if (absorbant == 0) {
