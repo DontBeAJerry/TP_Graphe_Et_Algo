@@ -17,14 +17,15 @@ int main() {
     int n = 0;
     int m = 0;
 
-    printf("\nPour des raisons évidentes liées à l'aléatoire, les algorithmes utiliseront des graphes préconstruits\n\n");
-    printf("\t1/ Génération d'un graphe aléatoire\n");
-    printf("\t2/ Génération d'un graphe fixe de 5 sommets et de 10 arrêtes\n");
-    printf("\t3/ Quitter\n");
-    printf("Choix : ");
-    scanf("%d", &choixGraphe);
 
-    while(choixGraphe != 9) {
+
+    do{
+        printf("\nPour des raisons évidentes liées à l'aléatoire, les algorithmes utiliseront des graphes préconstruits\n\n");
+        printf("\t1/ Génération d'un graphe aléatoire\n");
+        printf("\t2/ Génération d'un graphe fixe de 5 sommets et de 10 arrêtes\n");
+        printf("\t9/ Quitter\n");
+        printf("Choix : ");
+        scanf("%d", &choixGraphe);
         switch (choixGraphe) {
             case 1 :
                 l = generationAlea();
@@ -32,6 +33,7 @@ int main() {
                 break;
             case 2 :
                 l = generationFixe();
+                do{
                 printf("\n");
                 printf("\t1/ BellmanFord\n");
                 printf("\t2/ Dijkstra\n");
@@ -39,7 +41,7 @@ int main() {
                 printf("Choix : ");
                 scanf("%d", &choixAlgo);
 
-                while(choixAlgo != 9) {
+
                     switch (choixAlgo) {
                         case 1 :
                             printf("La source du graphe est le sommet 0\n");
@@ -50,19 +52,25 @@ int main() {
                             printf("La source du graphe est le sommet 0\n");
                             dijkstra_fixe(l, 0);
                             break;
+                        case 9 :
+                            break;
                         default:
                             printf("Le choix n\'existe pas, veuillez relancer le programme.");
                             break;
                     }
-                }
+                }while(choixAlgo != 9);
+            break;
+            case 9 :
                 break;
             default:
                 printf("Le choix n\'existe pas, veuillez relancer le programme.");
+                choixAlgo = 0;
                 break;
         }
 
-    }
+    }while(choixGraphe != 9);
 
+    printf("Au revoir !\n");
     return 0;
 }
 
