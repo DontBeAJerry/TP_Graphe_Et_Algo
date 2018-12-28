@@ -2,6 +2,7 @@
 #include "graphe_liste.h"
 #include "utils.h"
 
+
 LISTE generationFixe();
 LISTE generationAlea();
 
@@ -16,49 +17,51 @@ int main() {
     int n = 0;
     int m = 0;
 
-    /*
-    printf("1/ Génération d'un graphe aléatoire\n");
-    printf("2/ Génération d'un graphe fixe de 5 sommets et de 10 arrêtes\n");
+    printf("\nPour des raisons évidentes liées à l'aléatoire, les algorithmes utiliseront des graphes préconstruits\n\n");
+    printf("\t1/ Génération d'un graphe aléatoire\n");
+    printf("\t2/ Génération d'un graphe fixe de 5 sommets et de 10 arrêtes\n");
+    printf("\t3/ Quitter\n");
     printf("Choix : ");
     scanf("%d", &choixGraphe);
 
-    switch (choixGraphe){
-        case 1 :
-            l =  generationAlea();
-            break;
-        case 2 :
-            l = generationFixe();
-            break;
-        default:
-            printf("Le choix n\'existe pas, veuillez relancer le programme.");
-            break;
+    while(choixGraphe != 9) {
+        switch (choixGraphe) {
+            case 1 :
+                l = generationAlea();
+                afficher_LISTE(l);
+                break;
+            case 2 :
+                l = generationFixe();
+                printf("\n");
+                printf("\t1/ BellmanFord\n");
+                printf("\t2/ Dijkstra\n");
+                printf("\t9/ Quitter\n");
+                printf("Choix : ");
+                scanf("%d", &choixAlgo);
+
+                while(choixAlgo != 9) {
+                    switch (choixAlgo) {
+                        case 1 :
+                            printf("La source du graphe est le sommet 0\n");
+                            afficher_LISTE(l);
+                            bellmanFord(l, 0);
+                            break;
+                        case 2 :
+                            printf("La source du graphe est le sommet 0\n");
+                            dijkstra_fixe(l, 0);
+                            break;
+                        default:
+                            printf("Le choix n\'existe pas, veuillez relancer le programme.");
+                            break;
+                    }
+                }
+                break;
+            default:
+                printf("Le choix n\'existe pas, veuillez relancer le programme.");
+                break;
+        }
+
     }
-
-    afficher_LISTE(l);
-    printf("\n\n");
-    printf("1/ BellmanFord\n");
-    printf("2/ Dijkstra\n");
-    printf("Choix : ");
-    scanf("%d", &choixAlgo);
-
-    switch (choixAlgo){
-        case 1 :
-            printf("La source du graphe est le sommet 0\n");
-            bellmanFord(l, 0);
-            break;
-        case 2 :
-            printf("La source du graphe est le sommet 0\n");
-            dijkstra(l, 0);
-            break;
-        default:
-            printf("Le choix n\'existe pas, veuillez relancer le programme.");
-            break;
-    }*/
-
-
-    l = generationFixe();
-    dijkstra2();
-    printf("fin");
 
     return 0;
 }
@@ -105,14 +108,14 @@ LISTE generationFixe(){
     l.n = n;
     l.m = m;
 
-    /*Affichage de la matrice d'adjacence
+    //Affichage de la matrice d'adjacence
     for(unsigned int i = 0; i<n ; i++) {
         for (unsigned int j = 0; j < n; j++) {
             printf("%d ", M[i][j]);
         }
         printf("\n");
     }
-     */
+
     return l;
 }
 

@@ -4,7 +4,6 @@
 #include "time.h"
 #include "utils.h"
 
-#define V 9;
 
 /*
 * Génération d'une liste d'adjacence aléatoire puis converti en liste
@@ -132,20 +131,11 @@ void bellmanFord(LISTE l, int s){
 
 void dijkstra(LISTE l, int src){
 
-    int graph[9][9] = {{0, 4, 0, 0, 0, 0, 0, 8, 0},
-                       {4, 0, 8, 0, 0, 0, 0, 11, 0},
-                       {0, 8, 0, 7, 0, 4, 0, 0, 2},
-                       {0, 0, 7, 0, 9, 14, 0, 0, 0},
-                       {0, 0, 0, 9, 0, 10, 0, 0, 0},
-                       {0, 0, 4, 14, 10, 0, 2, 0, 0},
-                       {0, 0, 0, 0, 0, 2, 0, 1, 6},
-                       {8, 11, 0, 0, 0, 0, 1, 0, 7},
-                       {0, 0, 2, 0, 0, 0, 6, 7, 0}
-    };
+
     int u;
     int dist[l.n];
     bool sptSet[l.n]; //Sera 1 si le sommet i fait parti de la solution
-    /*
+
     int graph[l.n][l.n];
     MAILLON* tmp;
     //Initialisation de la matrice
@@ -169,7 +159,7 @@ void dijkstra(LISTE l, int src){
             printf("%d ", graph[i][j]);
         }
         printf("\n");
-    }*/
+    }
 
     //initialisation des listes de distances et de solution
     for (int i = 0; i < l.n; i++) {
@@ -236,9 +226,10 @@ int minDistance(int * dist, int * sptSet, int V){
     return min_index;
 }
 
-void dijkstra2()
+void dijkstra_fixe(LISTE l, int src)
 {
-    int graph[V][V] = {{0, 4, 0, 0, 0, 0, 0, 8, 0},
+    int V = l.n;
+    int graph[9][9] = {{0, 4, 0, 0, 0, 0, 0, 8, 0},
                        {4, 0, 8, 0, 0, 0, 0, 11, 0},
                        {0, 8, 0, 7, 0, 4, 0, 0, 2},
                        {0, 0, 7, 0, 9, 14, 0, 0, 0},
@@ -246,9 +237,9 @@ void dijkstra2()
                        {0, 0, 4, 14, 10, 0, 2, 0, 0},
                        {0, 0, 0, 0, 0, 2, 0, 1, 6},
                        {8, 11, 0, 0, 0, 0, 1, 0, 7},
-                       {0, 0, 2, 0, 0, 0, 6, 7, 0}
-    };
-    int src = 0;
+                       {0, 0, 2, 0, 0, 0, 6, 7, 0}};
+
+
     int dist[V];     // The output array.  dist[i] will hold the shortest
     // distance from src to i
 
@@ -272,7 +263,7 @@ void dijkstra2()
                 min_index = v;
             }
         }
-        int u = minDistance(dist, sptSet);
+        int u = min_index;
 
         // Mark the picked vertex as processed
         sptSet[u] = true;
