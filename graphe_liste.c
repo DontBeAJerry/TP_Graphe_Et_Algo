@@ -105,6 +105,7 @@ void drop_arete(LISTE *g,unsigned int i,unsigned int j)
 void afficher_LISTE(LISTE g)
 {
     printf("\n");
+    printf("Sommet i\t\tListe des pairs (d, c) successeurs, avec d le sommet d'arrivé et c le cout\n");
     for (unsigned int i = 0 ; i < g.n ; i++)
     {
         afficher_liste(g.L[i] , i);
@@ -115,7 +116,7 @@ void afficher_LISTE(LISTE g)
 void afficher_liste(MAILLON* l , unsigned int i)
 {
     if (!l)
-        printf ("%d : " , i);
+        printf ("%d : \t\t" , i);
     else
     {
         afficher_liste(l->suivant , i);
